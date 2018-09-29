@@ -32,13 +32,13 @@ module.exports = {
 
       if (!user) {
         return res.status(403).send({
-          error: 'The email was incorrect'
+          error: 'The login information was incorrect'
         })
       }
       const isPasswordValid = await user.comparePassword(password)
       if (!isPasswordValid) {
         return res.status(403).send({
-          error: 'The password was incorrect'
+          error: 'The login information was incorrect'
         })
       }
       const userJson = user.toJSON()
