@@ -20,9 +20,6 @@ module.exports = {
         error: 'this email account is already in use'
       })
     }
-    res.send({
-      message: `Hello ${req.body.email}! you are registred`
-    })
   },
   async login (req, res) {
     try {
@@ -32,16 +29,16 @@ module.exports = {
           email: email
         }
       })
+
       if (!user) {
         return res.status(403).send({
-          error: 'Invalid login information'
+          error: 'The email was incorrect'
         })
       }
-
       const isPasswordValid = await user.comparePassword(password)
       if (!isPasswordValid) {
         return res.status(403).send({
-          error: 'Invalid login information'
+          error: 'The password was incorrect'
         })
       }
       const userJson = user.toJSON()
@@ -51,7 +48,7 @@ module.exports = {
       })
     } catch (err) {
       res.status(500).send({
-        error: 'An error has occured'
+        error: 'An error has occured trying to log in'
       })
     }
   }

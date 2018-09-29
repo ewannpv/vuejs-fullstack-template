@@ -62,7 +62,6 @@ export default {
           email: this.email,
           password: this.password
         })
-        console.log(response)
         this.$store.dispatch('setSuccessAlert', response.data.succes)
         this.$router.push({
           name: 'login'
@@ -70,6 +69,7 @@ export default {
       } catch (error) {
         this.password = this.confPassword = ''
         this.error = error.response.data.error
+        console.log(this.error)
       }
     }
   }
