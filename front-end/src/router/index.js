@@ -9,6 +9,9 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
+    { path: '/',
+      redirect: '/board'
+    },
     {
       path: '/board',
       name: 'board',
@@ -27,10 +30,6 @@ export default new Router({
           name: 'register',
           path: 'register',
           component: Register
-        },
-        {
-          path: '',
-          redirect: { name: 'login' }
         }
       ]
     }
