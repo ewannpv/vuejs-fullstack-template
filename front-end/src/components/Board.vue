@@ -21,7 +21,7 @@
            >Login</v-list-tile-title>
            <v-list-tile-title
             v-if="$store.state.isUserLoggedIn"
-            @click="pushComponent('logout')"
+            @click="logOut()"
             >Logout</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="v-toolbar__items" v-if="$store.state.isUserLoggedIn">
-      <div @click="pushComponent('logout')" class="v-btn v-btn--flat v-btn--router theme--dark">
+      <div @click="logOut()" class="v-btn v-btn--flat v-btn--router theme--dark">
         <div class="v-btn__content">
           <span class="hidden-sm-and-down">Logout</span>
         </div>
@@ -79,11 +79,11 @@ export default {
       this.$router.push({
         name: component
       })
+    },
+    logOut () {
+      this.$store.dispatch('setToken', null)
+      this.$store.dispatch('setUser', null)
     }
-  },
-  logOut () {
-    this.$store.dispatch('setToken', null)
-    this.$store.dispatch('setUser', null)
   }
 }
 </script>
