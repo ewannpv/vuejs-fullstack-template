@@ -13,5 +13,8 @@ module.exports = {
   },
   authentification: {
     jwtSecret: process.env.JWT_SECRET || 'wne13in1i218NUIWnwduw'
+  },
+  hash: {
+    key: process.env.HASH_SECRET || 'wne13in1i218ddNUIWnwdquw'
   }
 }

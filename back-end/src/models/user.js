@@ -1,19 +1,12 @@
-const Promise = require('bluebird')
-const bcrypt = Promise.promisifyAll(require('bcrypt-nodejs'))
+const config = require('../config/config')
+const CryptoJS = require('crypto-js')
 
 function hashPassword (user, options) {
-  const SALT_FACTOR = 8
-
   if (!user.changed('password')) {
     return
   }
-
-  return bcrypt
-    .genSaltAsync(SALT_FACTOR)
-    .then(salt => bcrypt.hashAsync(user.password, salt, null))
-    .then(hash => {
-      user.setDataValue('password', hash)
-    })
+  const hashPassword = CryptoJS.HmacSHA1(user.password, config.hash.key).toString()
+  return user.setDataValue('password', hashPassword)
 }
 
 module.exports = (sequelize, DataTypes) => {
@@ -25,14 +18,13 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING
   }, {
     hooks: {
-      beforeCreate: hashPassword,
-      beforeUpdate: hashPassword,
-      beforeSave: hashPassword
+      beforeCreate: hashPassword
     }
   })
 
   User.prototype.comparePassword = function (password) {
-    return bcrypt.compareAsync(password, this.password)
+    const hashPassword = CryptoJS.HmacSHA1(password, config.hash.key).toString()
+    return hashPassword === this.password
   }
 
   User.associate = function (models) {
