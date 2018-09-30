@@ -4,6 +4,7 @@ import Board from '@/components/Board'
 import AuthLayout from '@/components/auth/Auth'
 import Login from '@/components/auth/Login'
 import Register from '@/components/auth/Register'
+import DBViewer from '@/components/DBViewer'
 
 Vue.use(Router)
 
@@ -15,7 +16,14 @@ export default new Router({
     {
       path: '/board',
       name: 'board',
-      component: Board
+      component: Board,
+      children: [
+        {
+          name: 'dbViewer',
+          path: 'dbViewer',
+          component: DBViewer
+        }
+      ]
     },
     {
       path: '/auth',

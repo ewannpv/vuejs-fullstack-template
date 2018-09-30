@@ -11,7 +11,7 @@ module.exports = {
       operatorsAliases: false
     }
   },
-  authentification: {
+  authentication: {
     jwtSecret: process.env.JWT_SECRET || 'wne13in1i218NUIWnwduw'
   },
   hash: {
