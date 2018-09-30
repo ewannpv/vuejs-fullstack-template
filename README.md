@@ -19,5 +19,10 @@ npm run dev
 # install dependencies
 npm install
 
+# clear database & adding admin account
+## email: admin@gmail.com
+## password: 12345678
+npm run seed
+
 # serve with hot reload at localhost:3000
 npm start
