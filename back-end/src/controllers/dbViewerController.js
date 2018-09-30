@@ -17,5 +17,27 @@ module.exports = {
         error: 'Internal error'
       })
     }
+  },
+  async deleteUser (req, res) {
+    try {
+      const { userID, userEmail } = req.params
+      const user = await User.findOne({
+        where: {
+          id: userID,
+          email: userEmail
+        }
+      })
+      if (!user) {
+        return res.status(403).send({
+          error: 'User was not found'
+        })
+      }
+      await user.destroy()
+      res.send(user)
+    } catch (err) {
+      res.status(500).send({
+        error: 'an error has occured trying to delete the user'
+      })
+    }
   }
 }
