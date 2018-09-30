@@ -5,6 +5,7 @@ import AuthLayout from '@/components/auth/Auth'
 import Login from '@/components/auth/Login'
 import Register from '@/components/auth/Register'
 import DBViewer from '@/components/DBViewer'
+import IsUserLoggedIn from '@/policies/isUserLoggedIn'
 
 Vue.use(Router)
 
@@ -21,6 +22,7 @@ export default new Router({
         {
           name: 'dbViewer',
           path: 'dbViewer',
+          beforeRouterEnter: IsUserLoggedIn,
           component: DBViewer
         }
       ]
