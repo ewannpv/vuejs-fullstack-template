@@ -6,6 +6,12 @@
       type="warning">
       <h4>{{error}}</h4>
       </v-alert>
+      <v-alert
+      v-model="succes"
+      dismissible
+      type="success">
+      <h4>{{succed}}</h4>
+      </v-alert>
     <v-data-table
     :headers="headers"
     :items="users"
@@ -51,31 +57,47 @@ export default {
       users: [],
       isloaded: false,
       error: '',
-      alert: false
+      succed: '',
+      alert: false,
+      succes: false
     }
   },
   async mounted () {
-    if (!this.$store.state.isUserLoggedIn) {
-      return this.$router.push({
-        name: 'board'
-      })
-    }
-    try {
-      const response = await DBViwerService.index()
-      this.users = response.data.users
-    } catch (error) {
-      console.log(error.data)
-    }
-    this.isloaded = true
+    this.loadUsers()
   },
   methods: {
-    deleteUser (user) {
+    async deleteUser (user) {
       if (!this.$store.state.user.isAdmin) {
         this.error = 'You dont have the permisson to delet users.'
         this.alert = true
         return
       }
-      console.log(`${user.email} has been deleted`)
+      try {
+        const response = await DBViwerService.deleteUser({
+          id: user.id,
+          email: user.email
+        })
+        this.succed = `${response.data.email} has been deleted`
+        this.loadUsers()
+        this.succes = true
+      } catch (error) {
+        this.error = error.data
+        this.alert = true
+      }
+    },
+    async loadUsers () {
+      if (!this.$store.state.isUserLoggedIn) {
+        return this.$router.push({
+          name: 'board'
+        })
+      }
+      try {
+        const response = await DBViwerService.index()
+        this.users = response.data.users
+      } catch (error) {
+        console.log(error.data)
+      }
+      this.isloaded = true
     }
   }
 }

@@ -20,11 +20,10 @@ module.exports = {
   },
   async deleteUser (req, res) {
     try {
-      const { userID, userEmail } = req.params
       const user = await User.findOne({
         where: {
-          id: userID,
-          email: userEmail
+          id: req.body.id,
+          email: req.body.email
         }
       })
       if (!user) {

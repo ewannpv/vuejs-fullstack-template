@@ -14,7 +14,7 @@ module.exports = (app) => {
   app.get('/board/dbViwer',
     isAuthenticated,
     DBViewerController.index)
-  app.get('/board/dbViwer/deleteUser',
+  app.post('/board/dbViwer/deleteUser',
     isAuthenticated,
     isAdmin,
     DBViewerController.deleteUser)
