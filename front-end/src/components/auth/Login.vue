@@ -46,6 +46,11 @@ export default {
       ]
     }
   },
+  watch: {
+    email: function (value) {
+      this.email = value.toLowerCase()
+    }
+  },
   computed: {
     checkPassword () {
       return this.password.length < 8 ? 'Password is too short' : true
