@@ -22,7 +22,7 @@ export default new Router({
         {
           name: 'dbViewer',
           path: 'dbViewer',
-          beforeRouterEnter: IsUserLoggedIn,
+          beforeEnter: IsUserLoggedIn,
           component: DBViewer
         }
       ]
