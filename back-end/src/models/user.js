@@ -1,7 +1,7 @@
 const config = require('../config/config')
 const CryptoJS = require('crypto-js')
 
-function hashPassword (user, options) {
+function hashPassword(user) {
   if (!user.changed('password')) {
     return
   }
@@ -30,9 +30,5 @@ module.exports = (sequelize, DataTypes) => {
     const hashPassword = CryptoJS.HmacSHA1(password, config.hash.key).toString()
     return hashPassword === this.password
   }
-
-  User.associate = function (models) {
-  }
-
   return User
 }

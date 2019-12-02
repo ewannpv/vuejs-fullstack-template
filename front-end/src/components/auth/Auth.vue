@@ -4,14 +4,14 @@
       <v-toolbar-title class="home" @click="pushComponent('board')">Board</v-toolbar-title>
       <div class="spacer"></div>
       <div class="v-toolbar__items">
-        <div @click="pushComponent('login')" class="v-btn v-btn--flat v-btn--router theme--dark">
+        <div @click="pushComponent('login')" class="v-btn text">
           <div class="v-btn__content">
             <span class="hidden-sm-and-down">Login</span>
           </div>
       </div>
       </div>
       <div class="v-toolbar__items">
-        <div @click="pushComponent('register')" class="v-btn v-btn--flat v-btn--router theme--dark">
+        <div @click="pushComponent('register')" class="v-btn text">
           <div class="v-btn__content">
             <span class="hidden-sm-and-down">Register</span>
           </div>

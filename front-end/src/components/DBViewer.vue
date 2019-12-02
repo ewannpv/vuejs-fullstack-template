@@ -81,6 +81,7 @@ export default {
         this.loadUsers()
         this.succes = true
       } catch (error) {
+        print(error)
       }
     },
     async loadUsers () {
@@ -93,6 +94,7 @@ export default {
         const response = await DBViwerService.index()
         this.users = response.data.users
       } catch (error) {
+                print(error)
       }
       this.isloaded = true
     }
