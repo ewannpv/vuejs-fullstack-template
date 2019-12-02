@@ -1,5 +1,4 @@
-const {
-  sequelize, User } = require('../src/models')
+const { sequelize, User } = require('../src/models')
 
 const Promise = require('bluebird')
 const users = require('./users.json')

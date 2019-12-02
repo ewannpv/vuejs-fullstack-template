@@ -14,7 +14,7 @@ module.exports = {
       const { email, password } = req.body
       await User.create({ email, password })
       res.send({
-        succes: `Account has been created.`
+        succes: 'Account has been created.'
       })
     } catch (err) {
       res.status(400).send({
